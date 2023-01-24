@@ -1,0 +1,48 @@
+---
+#update apt packages
+#upgrade packages
+#install dependencies, such as NodeJS and NPM
+#install pm2
+#create a ~/web directory
+#copy index test page from files/index.js to ~/web/index.js
+#Start the weeb server using the command pm2 start ~/web/index.js -f
+- name: "update apt packages"
+  become: true
+  become_method: sudo
+  apt:
+    update_cache: yes
+
+- name: "upgrade packages"
+  become: true
+  apt:
+    upgrade: yes
+
+- name: "install dependencies, such as NodeJS and NPM"
+  become: true
+  apt:
+    name: ["nodejs", "npm"]
+    state: latest
+    update_cache: yes
+
+- name: "install pm2"
+  become: true
+  npm:
+    name: pm2
+    global: yes
+    production: yes
+    state: present
+
+- name: "create a ~/web directory"
+  file:
+    path: ~/web
+    state: directory
+    mode: '0755'
+
+- name: "copy index test page from files/index.js to ~/web/index.js"
+  copy:
+    src: index.js
+    dest: ~/web/index.js
+
+- name: "Start the weeb server using the command pm2 start ~/web/index.js -f"
+  shell: |
+    pm2 start ~/web/index.js -f
