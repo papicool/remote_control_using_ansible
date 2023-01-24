@@ -1,12 +1,11 @@
-# Exercise - Rollback
 AWSTemplateFormatVersion: 2010-09-09
 Description: ND9991 C3 L4 
 Resources:
   EC2Instance:
     Type: 'AWS::EC2::Instance'
     Properties:
-      SecurityGroups:
-        - !Ref InstanceSecurityGroup
+      SecurityGroupIds:
+        - sg-000cfd5e5e4c87266
       KeyName: udacity
       ImageId: 'ami-00874d747dde814fa' # you may need to find out what instance types are available in your region - use https://cloud-images.ubuntu.com/locator/ec2/
       InstanceType: t3.micro
@@ -16,6 +15,6 @@ Resources:
       GroupDescription: Enable SSH access via port 22
       SecurityGroupIngress:
         - IpProtocol: tcp
-          FromPort: '22'
-          ToPort: '22'
+          FromPort: 22
+          ToPort: 22
           CidrIp: 0.0.0.0/0
