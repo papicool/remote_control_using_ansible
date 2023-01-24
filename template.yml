@@ -1,16 +1,13 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: 
-  "
-    TEST
-  "
+Description: "ND9991 C3 L4"
 Resources:
   EC2Instance:
     Type: 'AWS::EC2::Instance'
     Properties:
-      SecurityGroupIds:
-        - sg-000cfd5e5e4c87266
+      SecurityGroups:
+        - !Ref InstanceSecurityGroup
       KeyName: udacity
-      ImageId: 'ami-00874d747dde814fa' # yo may need to find out what instance types are available in your region - use https://cloud-images.ubuntu.com/locator/ec2/
+      ImageId: 'ami-00874d747dde814fa' # you may need to find out what instance types are available in your region - use https://cloud-images.ubuntu.com/locator/ec2/
       InstanceType: t2.micro
   InstanceSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
