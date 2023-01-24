@@ -17,11 +17,11 @@ jobs:
           name: Install Ansible
           command: |
             # Install Ansible
-            apk add --update ansible
+            sudo apk add --update ansible
       - run:
           name: Run Playbook and Configure server
           command: |
-            ansible-playbook -i inventory template.yml
+            sudo ansible-playbook -i inventory template.yml
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
